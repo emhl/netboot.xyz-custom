@@ -3,10 +3,19 @@
 ### netboot.xyz-custom menu
 ###
 
-:start
-echo Hello world!
-sleep 10
+:custom
+clear custom_choice
+menu Custom isos
+item option_opensuse ${space} OpenSuse Tumbleweed
+choose custom_choice || goto custom_exit
+echo ${cls}
+goto ${custom_choice}
 goto custom_exit
+
+:option_opensuse
+kernel https://boot.netboot.xyz/memdisk raw iso
+initrd https://download.opensuse.org/tumbleweed/iso/openSUSE-Tumbleweed-NET-x86_64-Current.iso
+boot || goto custom_exit
 
 :custom_exit
 exit 0
